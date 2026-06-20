@@ -135,15 +135,15 @@ func EncodeHeaders(ctx context.Context, param EncodeHeadersParam, headerf func(n
 		// target URI (the path-absolute production and optionally a '?' character
 		// followed by the query production, see Sections 3.3 and 3.4 of
 		// [RFC3986]).
-		f(":authority", host)
 		m := req.Method
 		if m == "" {
-			m = "GET"
+		    m = http.MethodGet
 		}
 		f(":method", m)
-		if !isNormalConnect {
-			f(":path", path)
-			f(":scheme", req.URL.Scheme)
+		f(":authority", host)
+		if req.Method != "CONNECT" {
+		    f(":scheme", req.URL.Scheme)
+		    f(":path", path)
 		}
 		if protocol != "" {
 			f(":protocol", protocol)
