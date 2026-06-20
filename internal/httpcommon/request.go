@@ -137,7 +137,7 @@ func EncodeHeaders(ctx context.Context, param EncodeHeadersParam, headerf func(n
 		// [RFC3986]).
 		m := req.Method
 		if m == "" {
-		    m = http.MethodGet
+		    m = "GET"
 		}
 		f(":method", m)
 		f(":authority", host)
